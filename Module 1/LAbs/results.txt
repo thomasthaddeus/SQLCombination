@@ -1,0 +1,24 @@
+9|1|Ain't Nobody's Business|9|447
+68|18|All Blues|4|696
+62|17|Apostrophe|7|350
+3|1|Basin Street Blues|5|296
+37|13|Birds of Fire|1|350
+16|11|Blue Suede xShoes|3|266
+67|18|Blue in Green|3|338
+1|1|Bright Lights Big City|1|320
+4|1|Caldonia|3|205
+39|13|Celestial Terrestrial Commuters|3|174
+60|17|Cosmik Debris|5|254
+56|17|Don't Eat the Yellow Snow|1|127
+22|12|Drive My Car|1|150
+61|17|Excentrifugal Forz|6|93
+70|11|Fake Track|9|549
+59|17|Father O'Blivion|4|138
+69|18|Flamenco Sketches|5|566
+66|18|Freddy Freeloader|2|589
+6|1|Georgia On My Mind|6|280
+30|12|Girl|9|153
+50|16|Good Morning Little Schoolgirl|1|285
+42|13|Hope|6|119
+31|12|I'm Looking Through You|10|147
+34|12|If I Needed Someone|13|143
