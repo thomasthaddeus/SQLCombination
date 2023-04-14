@@ -1,0 +1,691 @@
+-- SQLBook: Code
+-- MySql
+
+-- Database for IS456 Team Project
+
+USE employeedatabase;
+
+/* Drop tables in reverse order for Foreign Key Constraints*/
+
+DROP TABLE IF EXISTS Employee;
+
+DROP TABLE IF EXISTS Job;
+
+DROP TABLE IF EXISTS Department;
+
+-- Table: Department
+
+CREATE TABLE
+    IF NOT EXISTS Department (
+        DeptID INT NOT NULL,
+        DeptName NVARCHAR(50) NULL,
+        CONSTRAINT PK_Department PRIMARY KEY (DeptID ASC)
+    );
+
+-- Table: Job
+
+CREATE TABLE
+    IF NOT EXISTS Job (
+        JobID INT NOT NULL,
+        DeptID INT NOT NULL,
+        JobName NVARCHAR(50) NOT NULL,
+        Salary DECIMAL(13, 2) NULL,
+        CommPerc DECIMAL(18, 0) NULL,
+        BonusPerc DECIMAL(18, 0) NULL,
+        CONSTRAINT PK_Job PRIMARY KEY(JobID),
+        CONSTRAINT FK_Job_Department FOREIGN KEY (DeptID) REFERENCES Department(DeptID)
+    );
+
+-- Table: Employee
+
+CREATE TABLE
+    IF NOT EXISTS Employee (
+        EmployeeID INT NOT NULL,
+        JobID INT NOT NULL,
+        FirstName NVARCHAR(50) NULL,
+        LastName NVARCHAR(50) NULL,
+        EmailAddress NVARCHAR(50) NULL,
+        Phone CHAR(12) NULL,
+        GrossPay DECIMAL(13, 2) NULL,
+        HireDate DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+        CONSTRAINT PK_Employee PRIMARY KEY(EmployeeID),
+        CONSTRAINT FK_Employee_Job FOREIGN KEY (JobID) REFERENCES Job(JobID),
+        CONSTRAINT GrossPay_CHK CHECK ( (GrossPay > 1000))
+    );
+
+-- Index: JobID
+
+ALTER TABLE Job ADD INDEX JobID_IDX (JobID);
+
+-- Views for IS456 Team Project
+
+DROP VIEW IF EXISTS Employee_Job;
+
+CREATE VIEW Employee_Job AS 
+	SELECT CONCAT(e.FirstName, ' ', e.LastName) AS full_name,
+	       j.JobName AS job_title
+	FROM Employee e
+	JOIN Job j ON j.JobID = e.JobID
+	GROUP BY full_name,
+job_title; 
+
+-- View: Job_Name_ID_Employee
+
+DROP VIEW IF EXISTS Job_Name_ID_Employee;
+
+CREATE VIEW Job_Name_ID_Employee AS 
+	SELECT
+	    j.JobID AS job_code,
+	    j.JobName AS Job,
+	    CONCAT(e.FirstName, ' ', e.LastName) AS employee_name
+	FROM Job j
+	JOIN Employee e ON j.JobID = e.
+JobID; 
+
+USE employeedatabase;
+
+/* Clear data in reverse order due to foreign key constraints */
+
+DELETE FROM Employee WHERE EmployeeID > 0;
+
+DELETE FROM Job WHERE JobID > 0;
+
+DELETE FROM Department WHERE DeptID > 0;
+
+/* Populate Departments first */
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (1, 'Corporate');
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (2, 'Regional Management');
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (3, 'Human Resources');
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (4, 'Accounting');
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (5, 'Quality Assurance');
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (6, 'Customer Service');
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (7, 'Sales');
+
+INSERT INTO Department (DeptID, DeptName) VALUES (8, 'IT');
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (9, 'Reception');
+
+INSERT INTO
+    Department (DeptID, DeptName)
+VALUES (10, 'Office Management');
+
+/* Populate Jobs Next */
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        1,
+        1,
+        'CEO',
+        300000.00,
+        NULL,
+        40.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        2,
+        1,
+        'CFO',
+        280000.00,
+        NULL,
+        40.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        3,
+        2,
+        'General Manager',
+        180000.00,
+        NULL,
+        30.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        4,
+        2,
+        'Assistant to the General Manager',
+        130000.00,
+        NULL,
+        15.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        5,
+        3,
+        'HR Rep',
+        80000.00,
+        NULL,
+        10.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        6,
+        4,
+        'Accountant',
+        90000.00,
+        NULL,
+        10.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        7,
+        5,
+        'QA Engineer',
+        80000.00,
+        NULL,
+        10.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        8,
+        6,
+        'Customer Success Manager',
+        70000.00,
+        NULL,
+        10.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        9,
+        7,
+        'Sales Manager',
+        70000.00,
+        30.0,
+        NULL
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        10,
+        8,
+        'IT Specialist',
+        95000.00,
+        NULL,
+        10.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        11,
+        9,
+        'Receptionist',
+        55000.00,
+        NULL,
+        10.0
+    );
+
+INSERT INTO
+    Job (
+        JobID,
+        DeptID,
+        JobName,
+        Salary,
+        CommPerc,
+        BonusPerc
+    )
+VALUES (
+        12,
+        10,
+        'Office Manager',
+        60000.00,
+        NULL,
+        10.0
+    );
+
+/* Employee Table Last */
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        1,
+        2,
+        'David',
+        'Wallace',
+        'david.wallace@office.com',
+        '5555555000',
+        380000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        2,
+        3,
+        'Michael',
+        'Scott',
+        'michael.scott@office.com',
+        '5555555000',
+        220000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        3,
+        4,
+        'Dwight',
+        'Schrute',
+        'dwight.schrute@office.com',
+        '5555555000',
+        145000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        4,
+        5,
+        'Toby',
+        'Flenderson',
+        'toby.flenderson@office.com',
+        '5555555000',
+        85000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        5,
+        6,
+        'Angela',
+        'Martin',
+        'angela.martin@office.com',
+        '5555555000',
+        94000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        6,
+        7,
+        'Creed',
+        'Bratton',
+        'creed.bratton@office.com',
+        '5555555000',
+        85000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        7,
+        8,
+        'Kelly',
+        'Kapoor',
+        'kelly.kapoor@office.com',
+        '5555555000',
+        73000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        8,
+        9,
+        'Jim',
+        'Halpert',
+        'jim.halpert@office.com',
+        '5555555000',
+        97000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        9,
+        11,
+        'Erin',
+        'Hannon',
+        'erin.hannon@office.com',
+        '5555555000',
+        55000.00,
+        '2006-03-03 01:15:00'
+    );
+
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        10,
+        12,
+        'Pam',
+        'Halpert',
+        'pam.halper@office.com',
+        '5555555000',
+        70000.00,
+        '2006-03-03 01:15:00'
+    );
+
+USE employeedatabase;
+
+# Gross Pay must be over 1000
+INSERT INTO
+    Employee (
+        EmployeeID,
+        JobID,
+        FirstName,
+        LastName,
+        EmailAddress,
+        Phone,
+        GrossPay,
+        HireDate
+    )
+VALUES (
+        11,
+        2,
+        'Jan',
+        'Levinson',
+        'jan.levinson@office.com',
+        '5555555000',
+        150000.00,
+        '2006-03-03 01:15:00'
+    );
+
+USE employeedatabase;
+
+DROP PROCEDURE IF EXISTS UpdateEmployeeGrossPay;
+
+DELIMITER //
+
+CREATE PROCEDURE UpdateEmployeeGrossPay(IN ID INT, 
+IN NewGrossPay DECIMAL(13, 2)) 
+BEGIN 
+	UPDATE Employee SET GrossPay = NewGrossPay WHERE EmployeeID = ID;
+	E E 
+END// 
+
+DELIMITER ;
+
+CALL UpdateEmployeeGrossPay(3, 99383.22);
+
+SELECT * FROM Employee WHERE EmployeeID = 3;
+
+USE employeedatabase;
+
+-- #Tasks
+
+-- #1. Write a query to display the names (first_name, last_name) using alias name "First Name", "Last Name"
+
+SELECT
+    FirstName AS 'First Name',
+    LastName AS 'Last Name'
+FROM employee;
+
+-- #2. Write a query to get unique department ID from Job table.
+
+SELECT
+    DISTINCT d.DeptID,
+    deptname
+FROM Job
+    JOIN Department AS d ON job.DeptID = d.DeptID;
+
+-- #3. Write a query to get all employee details from the employee table order by first name, descending.
+
+SELECT * FROM employee ORDER BY FirstName DESC;
+
+-- #4. Write a query to get the names (FirstName, LastName), GrossPay, PF of all the employees (PF is calculated as 12% of salary).
+
+SELECT
+    concat(e.FirstName, ' ', e.LastName) AS Names,
+    j.Salary,
+    j.CommPerc,
+    j.BonusPerc,
+    e.GrossPay,
+    j.Salary *.12 as PF
+FROM Employee e
+    INNER JOIN Job j ON j.JobID = e.JobID
+WHERE j.Salary > 10000
+ORDER BY j.salary ASC;
+
+-- #5. Write a query to get the employee ID, names (first_name, last_name), salary in ascending order of salary.
+
+SELECT
+    e.EmployeeID,
+    concat(e.FirstName, ' ', e.LastName) AS Names,
+    j.Salary
+FROM Employee e
+    JOIN Job j ON j.JobID = e.JobID
+ORDER BY j.Salary ASC;
+
+-- #6. Write a query to get the total salaries payable to employees.
+
+SELECT
+    SUM(j.Salary) AS 'Total Payroll'
+FROM Employee e
+    INNER JOIN Job j ON j.JobID = e.JobID;
+
+-- #7. Write a query to get the maximum and minimum salary from the employees' table.
+
+SELECT
+    MAX(Salary) AS 'Maximum',
+    MIN(Salary) AS 'Minimum'
+FROM Job;
+
+SELECT
+    MAX(GrossPay) AS 'Maximum',
+    MIN(GrossPay) AS 'Minimum'
+FROM Employee;
+
+-- #8 Write a query to get the average salary and number of employees in the employees' table
+
+SELECT
+    ROUND(AVG(j.Salary)) AS avg_salary,
+    COUNT(DISTINCT e.EmployeeID) AS 'Total Employees'
+FROM Employee e
+    INNER JOIN Job j ON j.JobID = e.JobID;
