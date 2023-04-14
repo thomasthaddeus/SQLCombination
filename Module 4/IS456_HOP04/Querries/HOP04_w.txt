@@ -1,0 +1,12 @@
+
+-- 05 UPPER/LOWER
+-- [world.db]
+SELECT 'StRiNg' = 'string';
+SELECT LOWER('StRiNg') = LOWER('string');
+SELECT UPPER('StRiNg') = UPPER('string');
+SELECT UPPER(Name) FROM City ORDER BY Name;
+SELECT LOWER(Name) FROM City ORDER BY Name;
+
+-- 02 LENGTH
+SELECT LENGTH('string');
+SELECT Name, LENGTH(Name) AS Len FROM City ORDER BY Len DESC;
