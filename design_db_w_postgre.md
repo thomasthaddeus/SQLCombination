@@ -187,19 +187,18 @@ We'll start with tables with just a few constraints and build upon them througho
     VALUES (____, ____);
     ```
 
-15.  Update the old manufacturers’ parts in 'parts' to reference the new company you’ve just added to 'manufacturers'.
+15.  Update the old manufacturers’ parts in 'parts' to reference the new company you’ve just added to 'manufacturers'. We need to find a way to select the old manufacturers’ rows in parts and replace them with the new. We can use manufacturer_id with IN to select these rows. IN works similarly to OR — it will filter the rows that match any of the values inside the IN parentheses. Fill in the code below to update parts.
 
-    We need to find a way to select the old manufacturers’ rows in parts and replace them with the new. We can use manufacturer_id with IN to select these rows. IN works similarly to OR — it will filter the rows that match any of the values inside the IN parentheses.
+   ```sql
+   UPDATE parts
+   SET manufacturer_id = 11
+   WHERE manufacturer_id IN (____, ____);
+   ```
 
-    Fill in the code below to update parts.
+Another way of writing this would be
 
-    ```sql
-    UPDATE parts
-    SET manufacturer_id = 11
-    WHERE manufacturer_id IN (____, ____);
-    Another way of writing this would be
-
-    UPDATE parts
-    SET manufacturer_id = 11
-    WHERE manufacturer_id = ____ OR manufacturer_id = ____;
-    ```
+   ```sql
+   UPDATE parts
+   SET manufacturer_id = 11
+   WHERE manufacturer_id = ____ OR manufacturer_id = ____;
+   ```
