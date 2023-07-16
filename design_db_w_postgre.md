@@ -19,13 +19,13 @@ We'll start with tables with just a few constraints and build upon them througho
 
     To ensure there are no empty values we can place UNIQUE and NOT NULL constraints on code. Fill in the code below to add these constraints.
 
-        ```sql
-        ALTER TABLE parts
-        ALTER COLUMN code SET ____ ____;
+    ```sql
+    ALTER TABLE parts
+    ALTER COLUMN code SET ____ ____;
 
-        ALTER TABLE parts
-        ADD UNIQUE(____);
-        ```
+    ALTER TABLE parts
+    ADD UNIQUE(____);
+    ```
 
 3. The parts table is missing values in the description column. Alter the table so that all rows have a value for description.
 
@@ -33,46 +33,46 @@ We'll start with tables with just a few constraints and build upon them througho
 
     Because there are missing values in this table, we’d need to backfill these values before adding a constraint. Fill in the code below to be able to add the constraint on description without throwing an error.
 
-        ```sql
-        UPDATE parts
-        SET description = 'None Available'
-        WHERE description ____ ____;
-        BONUS:
-        ```
+    ```sql
+    UPDATE parts
+    SET description = 'None Available'
+    WHERE description ____ ____;
+    BONUS:
+    ```
 
     To update each row with a different value, you can follow the same pattern, but you’ll need to fill the descriptions. See the following example. First, we create an intermediate table that will store descriptions.
 
-        ```sql
-        CREATE TABLE part_descriptions (
-            id int PRIMARY KEY,
-            description text
-        );
-        ```
+    ```sql
+    CREATE TABLE part_descriptions (
+        id int PRIMARY KEY,
+        description text
+    );
+    ```
 
     Then we fill the intermediate table with the descriptions for the empty rows in 'parts'. In this example we assume we’re filling id=1 and id=2.
 
-        ```sql
-        INSERT INTO part_descriptions VALUES (1, '5V resistor'), (2, '3V resistor');
-        ```
+    ```sql
+    INSERT INTO part_descriptions VALUES (1, '5V resistor'), (2, '3V resistor');
+    ```
 
     Finally, we update the values in the original table using an UPDATE statement while joining the original table with the table with descriptions.
 
-        ```sql
-        UPDATE parts
-        SET description = part_descriptions.description
-        from part_descriptions
-        where part_descriptions.id = parts.id
-        and parts.description IS NULL
-        ```
+    ```sql
+    UPDATE parts
+    SET description = part_descriptions.description
+    from part_descriptions
+    where part_descriptions.id = parts.id
+    and parts.description IS NULL
+    ```
 
 4. To test that you’ve successfully back-filled parts, add a constraint on parts that ensures that all values in description are filled and non-empty.
 
     To do this, you can add a NOT NULL constraint on description. If you’ve successfully back-filled parts, Postgres will allow you to add a NOT NULL constraint. Fill in the code below to try it out.
 
-        ```sql
-        ALTER TABLE parts
-        ALTER COLUMN description SET ____ ____;
-        ```
+    ```sql
+    ALTER TABLE parts
+    ALTER COLUMN description SET ____ ____;
+    ```
 
 5. Test the constraint by trying to insert a row into parts with the following information.
 
@@ -94,39 +94,39 @@ We'll start with tables with just a few constraints and build upon them througho
 
     To implement these rules we need to alter the columns and set each not null. Fill in the code below to add these constraints.
 
-        ```sql
-        ALTER TABLE reorder_options
-        ALTER COLUMN ____ SET NOT NULL;
-        ```
+    ```sql
+    ALTER TABLE reorder_options
+    ALTER COLUMN ____ SET NOT NULL;
+    ```
 
 7. Let’s implement a check that ensures that price_usd and quantity are both positive. Can you think of how to enforce these rules as a single constraint and as two separate constraints?
 
     To ensure that both of these fields are positive we can create either one or two checks. Fill in the code below to ensure that both fields are positive using a single check.
 
-        ```sql
-        ALTER TABLE reorder_options
-        ADD CHECK (____ > 0 AND ____ > 0);
-        ```
+    ```sql
+    ALTER TABLE reorder_options
+    ADD CHECK (____ > 0 AND ____ > 0);
+    ```
 
 8. Let's assume our storeroom mostly tracks parts with a price per unit between 0.02 USD and 25.00 USD. Add a constraint to reorder_options that limits price per unit to within that range. Assume that price per unit for a given ordering option is the price divided by the quantity.
 
     We can use a CHECK constraint to enforce the constraints upper and lower limits. Fill in the code below that finishes this constraint.
 
-        ```sql
-        ALTER TABLE reorder_options
-        ADD CHECK (price_usd/quantity > ____ AND price_usd/quantity < ____);
-        ```
+    ```sql
+    ALTER TABLE reorder_options
+    ADD CHECK (price_usd/quantity > ____ AND price_usd/quantity < ____);
+    ```
 
 9. Add a constraint to ensure that we don’t have pricing information on parts that aren’t already tracked in our DB schema. Form a relationship between parts and reorder_options that ensures all parts in reorder_options refer to parts tracked in parts.
 
     We should add a foreign key constraint that links reorder_options and parts. As an intermediate step, we need to make sure there is a primary key on parts. Fill in the code below to add such a constraint.
 
-        ```sql
-        ALTER TABLE parts
-        ADD PRIMARY KEY (____);
-        ALTER TABLE reorder_options
-        ADD FOREIGN KEY (____) REFERENCES parts (____);
-        ```
+    ```sql
+    ALTER TABLE parts
+    ADD PRIMARY KEY (____);
+    ALTER TABLE reorder_options
+    ADD FOREIGN KEY (____) REFERENCES parts (____);
+    ```
 
 ### Improving Location Tracking
 
@@ -134,10 +134,10 @@ We'll start with tables with just a few constraints and build upon them througho
 
     We can add a CHECK constraint on locations to ensure that qty is greater than 0. Fill in the code below to complete this constraint.
 
-        ```sql
-        ALTER TABLE locations
-        ADD CHECK (____ > ____);
-        ```
+    ```sql
+    ALTER TABLE locations
+    ADD CHECK (____ > ____);
+    ```
 
 11. Let's ensure that locations records only one row for each combination of location and part. This should make it easier to access information about a location or part from the table. For example, our database should display:
 
@@ -153,19 +153,19 @@ We'll start with tables with just a few constraints and build upon them througho
 
     This requirement is suggesting that part_id and location should be unique within the locations table. To do this we can add a UNIQUE constraint. Fill in the code below to complete the constraint.
 
-        ```sql
-        ALTER TABLE locations
-        ADD UNIQUE (____, ____);
-        ```
+    ```sql
+    ALTER TABLE locations
+    ADD UNIQUE (____, ____);
+    ```
 
 12. Let's ensure that for a part to be stored in locations, it must already be registered in parts. Write a constraint that forms the relationship between these two tables and ensures only valid parts are entered into locations.
 
     For this requirement, we must link locations and parts with a `FOREIGN KEY` constraint. Fill in the code below to complete the constraint.
 
-        ```sql
-        ALTER TABLE locations
-        ADD FOREIGN KEY (____) REFERENCES parts (____);
-        ```
+    ```sql
+    ALTER TABLE locations
+    ADD FOREIGN KEY (____) REFERENCES parts (____);
+    ```
 
 ### Improving Manufacturer Tracking
 
@@ -173,19 +173,19 @@ We'll start with tables with just a few constraints and build upon them througho
 
     To form a relationship between tables we’d want to use a `FOREIGN KEY` constraint that establishes parts as a child table and manufacturers as a parent. Fill in the code below to add this constraint.
 
-        ```sql
-        ALTER TABLE parts
-        ADD FOREIGN KEY (____) REFERENCES ____ (id);
-        ```
+    ```sql
+    ALTER TABLE parts
+    ADD FOREIGN KEY (____) REFERENCES ____ (id);
+    ```
 
 14. Let's test the most recent constraint we’ve added. Assume that 'Pip Industrial' and 'NNC Manufacturing' merge and become 'Pip-NNC Industrial'. Create a new manufacturer in manufacturers with an id=11.
 
-    For this task we must insert a row into manufacturers. Fill in the code below with the values described above.
+    For this task, we must insert a row into manufacturers. Fill in the code below with the values described above.
 
-        ```sql
-        INSERT INTO manufacturers(name, id)
-        VALUES (____, ____);
-        ```
+    ```sql
+    INSERT INTO manufacturers(name, id)
+    VALUES (____, ____);
+    ```
 
 15.  Update the old manufacturers’ parts in 'parts' to reference the new company you’ve just added to 'manufacturers'.
 
@@ -193,13 +193,13 @@ We'll start with tables with just a few constraints and build upon them througho
 
     Fill in the code below to update parts.
 
-        ```sql
-        UPDATE parts
-        SET manufacturer_id = 11
-        WHERE manufacturer_id IN (____, ____);
-        Another way of writing this would be
+    ```sql
+    UPDATE parts
+    SET manufacturer_id = 11
+    WHERE manufacturer_id IN (____, ____);
+    Another way of writing this would be
 
-        UPDATE parts
-        SET manufacturer_id = 11
-        WHERE manufacturer_id = ____ OR manufacturer_id = ____;
-        ```
+    UPDATE parts
+    SET manufacturer_id = 11
+    WHERE manufacturer_id = ____ OR manufacturer_id = ____;
+    ```
