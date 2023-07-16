@@ -1,0 +1,27 @@
+	PREP
+--------------------
+mysql -h 127.0.0.1 -P 3307 -p -u root
+USE classicmodels;
+
+
+Section 1
+-------------------------------
+SELECT contactFirstName, city
+FROM customers
+WHERE country='USA';
+
+SELECT customerNumber, amount
+FROM payments
+WHERE amount >= 50000;
+
+SELECT contactFirstName, city
+FROM customers
+WHERE city LIKE 's%';
+--------------------------------
+Q1-1: Its for finding WHERE i went wrong by not transferring out of this school. 
+Q1-2: Its the second condition checked in a SELECT statement that restricts the search parameters.
+Q2-1: Understand what !!!! If theyre not Donald Trump I'm sure they could misinterpret it plenty fine n their own. 
+	I dont know what people in generalized questions would and wouldnt know.
+
+Section 2
+--------------------------------

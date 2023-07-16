@@ -1,0 +1,26 @@
+Region|SUM(Population)
+Antarctica|
+Australia and New Zealand|22753100
+Baltic Countries|7561900
+British Islands|63398500
+Caribbean|38140000
+Central Africa|95652000
+Central America|135221000
+Eastern Africa|246999000
+Eastern Asia|1507328000
+Eastern Europe|307026000
+Melanesia|6472000
+Micronesia|543000
+Micronesia/Caribbean|
+Middle East|188380700
+Nordic Countries|24166400
+North America|309632000
+Northern Africa|173266000
+Polynesia|633050
+South America|345780000
+Southeast Asia|518541000
+Southern Africa|46886000
+Southern Europe|144674200
+Southern and Central Asia|1490776000
+Western Africa|221672000
+Western Europe|183247600

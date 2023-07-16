@@ -1,0 +1,3 @@
+|Album|Tracks|
+|---|---:|
+|Rubber Soul|14|

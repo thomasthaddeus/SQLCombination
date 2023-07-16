@@ -1,0 +1,9 @@
+|Album|Tracks|
+|---|---|
+|Rubber Soul|14|
+|Birds of Fire|10|
+|Two Men with the Blues|10|
+|Apostrophe|9|
+|Hendrix in the West|9|
+|Live And|6|
+|Kind of Blue|5|

@@ -1,0 +1,2 @@
+COUNT(DISTINCT HeadOfState)
+179

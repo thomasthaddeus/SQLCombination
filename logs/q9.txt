@@ -1,0 +1,5 @@
+id  description  onhand
+--  -----------  ------
+1   rock         20    
+2   paper        25    
+3   scissors     25    

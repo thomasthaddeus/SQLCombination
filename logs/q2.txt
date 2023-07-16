@@ -1,0 +1,2 @@
+widgetInventory  widgetSales    
+main: D:\School\_4_Summer_2022\IS456\Module 6\IS456_HOP06\test.db r/w

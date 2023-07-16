@@ -1,0 +1,26 @@
+Region|AVG(Population)
+Antarctica|
+Australia and New Zealand|4550620.0
+Baltic Countries|2520633.33333333
+British Islands|31699250.0
+Caribbean|1589166.66666667
+Central Africa|10628000.0
+Central America|16902625.0
+Eastern Africa|12999947.3684211
+Eastern Asia|188416000.0
+Eastern Europe|30702600.0
+Melanesia|1294400.0
+Micronesia|77571.4285714286
+Micronesia/Caribbean|
+Middle East|10465594.4444444
+Nordic Countries|3452342.85714286
+North America|61926400.0
+Northern Africa|24752285.7142857
+Polynesia|63305.0
+South America|24698571.4285714
+Southeast Asia|47140090.9090909
+Southern Africa|9377200.0
+Southern Europe|9644946.66666667
+Southern and Central Asia|106484000.0
+Western Africa|13039529.4117647
+Western Europe|20360844.4444444

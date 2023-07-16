@@ -1,0 +1,2 @@
+AVG(Population)
+26201506.25

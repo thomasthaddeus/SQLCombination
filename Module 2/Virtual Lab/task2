@@ -1,6 +1,0 @@
-Using Command Prompt, write a command to save 24 Tracks from the album table and order them by title, into a text file. Take a screenshot and submit it.
-
-d:
-cd D:\Downloads\sqlitestudio-3.3.3\SQLiteStudio
-sqlitestudiocli chinook.db.sql
-SELECT * FROM chinook.db

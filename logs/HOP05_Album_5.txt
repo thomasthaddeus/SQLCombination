@@ -1,0 +1,5 @@
+|Album|Tracks|
+|---|---|
+|Rubber Soul|14|
+|Birds of Fire|10|
+|Two Men with the Blues|10|

@@ -1,0 +1,26 @@
+Region|MIN(Population)|MAX(Population)
+Antarctica||
+Australia and New Zealand|600|18886000
+Baltic Countries|1439200|3698500
+British Islands|3775100|59623400
+Caribbean|8000|11201000
+Central Africa|147000|51654000
+Central America|241000|98881000
+Eastern Africa|77000|62565000
+Eastern Asia|473000|1277558000
+Eastern Europe|4380000|146934000
+Melanesia|190000|4807000
+Micronesia|12000|168000
+Micronesia/Caribbean||
+Middle East|599000|66591000
+Nordic Countries|3200|8861400
+North America|7000|278357000
+Northern Africa|293000|68470000
+Polynesia|50|235000
+South America|2000|170115000
+Southeast Asia|328000|212107000
+Southern Africa|1008000|40377000
+Southern Europe|1000|57680000
+Southern and Central Asia|286000|1013662000
+Western Africa|6000|111506000
+Western Europe|32300|82164700
